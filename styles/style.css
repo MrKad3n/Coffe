@@ -48,13 +48,15 @@ footer {
     box-shadow: #C38154 0px -5px 10px -5px;
     color: white;
     text-align: center;
+    width:100%;
     padding: 20px;
+    margin-top:20px;
     display: flex;
     justify-content: space-around;
 }
 footer a {
     color:white;
-    
+
 }
 footer>div {
     margin: 0px 20px;
@@ -72,4 +74,30 @@ footer img {
 }
 .hover:hover {
     background-color: rgba(179, 179, 179, 0.2);
+}
+figure {
+   
+    width:fit-content;
+    margin-left:40%;
+    margin:10px;
+}
+figure img {
+    
+    width:100px;
+}
+figcaption {
+    color:#fbc982;
+}
+section {
+    padding: 12px;
+    height:fit-content;
+    background-color: #C38154;
+}
+section h2 {
+    display: inline;
+}
+h1 {
+    font-size:50px;
+    color:#884A39;
+    font-weight: 50px;
 }
