@@ -73,3 +73,8 @@ footer img {
 .hover:hover {
     background-color: rgba(179, 179, 179, 0.2);
 }
+
+hr {
+    border:3px solid #884A39;
+    border-radius: 5%;
+}
