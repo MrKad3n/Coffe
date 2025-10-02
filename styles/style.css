@@ -3,12 +3,18 @@
     margin:0px;
     font-family: Arial, Helvetica, sans-serif;
 }
+body {
+    background-color: #FFC26F;
+}
 header img {
     height: 100px;
-    width: 100%;
+    width: 100px;
+    display: absolute;
+    float: left;
 }
 header {
     align-items: center;
+    display: inline-flex;
     padding: 10px;
 }
 header:hover {
