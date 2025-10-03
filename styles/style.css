@@ -121,3 +121,9 @@ button:active{
 svg {
     margin-bottom: -10px;
 }
+#buy {
+    display: flex;
+}
+.checkItem {
+    width: fit-content;
+}
