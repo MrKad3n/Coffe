@@ -31,6 +31,7 @@ header{
     align-items: center;
     display: inline-flex;
     padding: 10px;
+    background: radial-gradient(#fbc982 0%, #fbc98215 50%, #fbc98200 100%);
 }
 header:hover {
     background-color: rgba(179, 179, 179, 0.2);
@@ -42,6 +43,7 @@ nav {
     justify-content: center;
     padding: 30px;
     white-space: nowrap;
+    text-shadow: 4px 4px 4px #000000;
 }
 nav a {
     text-decoration: none;
@@ -120,6 +122,7 @@ h1 {
     font-size:50px;
     color:#884A39;
     font-weight: 50px;
+    text-shadow:2px 2px 5px #C38154
 }
 hr {
     border:3px solid #884A39;
@@ -193,4 +196,8 @@ button {
 button:hover {
   background-position: right center;
 }
-
+#picture{
+    background-image: url("../images/Store.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
