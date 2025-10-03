@@ -49,6 +49,7 @@ footer {
     color: white;
     text-align: center;
     padding: 20px;
+    position: sticky;
     display:flex;
     justify-content: space-around;
 }
