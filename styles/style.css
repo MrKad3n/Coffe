@@ -112,6 +112,12 @@ button{
     background-color:#fbc982;
     border:1px solid #884A39;
 }
+button:hover{
+    background-color: #FFC26F;
+}
+button:active{
+    background-color: #ffffff;
+}
 svg {
     margin-bottom: -10px;
 }
@@ -120,4 +126,24 @@ svg {
 }
 .checkItem {
     width: fit-content;
+}
+#octevents{
+    margin-left: 25%;
+    float:left;
+}
+#octevents, #calendar{
+    background-color: #C38154;
+    color: #fbc982;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+    width: fit-content;
+    line-height: 200%;
+    height: fit-content;
+    font-size: 120%;
+}
+#calendar{
+    float:right;
+    margin-right: 25%;
 }
