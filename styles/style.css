@@ -48,6 +48,7 @@ footer {
     box-shadow: #C38154 0px -5px 10px -5px;
     color: white;
     text-align: center;
+    margin-top: -5px;
     padding: 20px;
     position: sticky;
     display:flex;
@@ -82,20 +83,22 @@ figure {
     margin:10px;
 }
 figure img {
-    
-    width:100px;
+    max-width: 30%;
+    max-height:30%;
 }
 figcaption {
     color:#fbc982;
 }
 section {
     padding: 12px;
+    margin-top:0px;
     height:fit-content;
     justify-items: right;
     background-color: #C38154;
 }
 section h2 {
     display: inline;
+    
 }
 h1 {
     font-size:50px;
@@ -109,4 +112,7 @@ hr {
 button{
     background-color:#fbc982;
     border:1px solid #884A39;
+}
+svg {
+    margin-bottom: 0px;
 }
