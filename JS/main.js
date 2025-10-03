@@ -1,1 +1,3 @@
-console.log("If you read this you gain aura")
+// variables
+var checkout = 0;
+
