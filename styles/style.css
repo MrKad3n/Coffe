@@ -51,7 +51,8 @@ footer {
     width:100%;
     padding: 20px;
     margin-top:20px;
-    display: flex;
+    position: sticky;
+    display:flex;
     justify-content: space-around;
 }
 footer a {
@@ -92,6 +93,7 @@ figcaption {
 section {
     padding: 12px;
     height:fit-content;
+    justify-items: right;
     background-color: #C38154;
 }
 section h2 {
