@@ -144,6 +144,12 @@ svg {
     font-size: 120%;
 }
 #calendar{
-    float:right;
-    margin-right: 25%;
+    float:left;
+
+}
+#octevents div, #calendar div{
+    margin: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    float:left;
+    padding: 10px;
 }
