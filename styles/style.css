@@ -3,7 +3,20 @@
     margin:0px;
     font-family: Arial, Helvetica, sans-serif;
 }
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
 
+.fadeInUp-animation {
+  animation: 1.5s fadeInUp;
+}
 /*Basic Styles*/
 body {
     background-color: #FFC26F;
@@ -72,6 +85,10 @@ footer img {
 }
 .hover:hover {
     background-color: rgba(179, 179, 179, 0.2);
+}
+p {
+    color:#884A39;
+    font-weight:bold;
 }
 
 figure {
@@ -146,6 +163,14 @@ svg {
 #calendar{
     float:right;
     margin-right: 25%;
+    float:left;
+
+}
+#octevents div, #calendar div{
+    margin: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    float:left;
+    padding: 10px;
 }
 
 button {
@@ -168,3 +193,4 @@ button {
 button:hover {
   background-position: right center;
 }
+
