@@ -127,3 +127,23 @@ svg {
 .checkItem {
     width: fit-content;
 }
+#octevents{
+    margin-left: 25%;
+    float:left;
+}
+#octevents, #calendar{
+    background-color: #C38154;
+    color: #fbc982;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+    width: fit-content;
+    line-height: 200%;
+    height: fit-content;
+    font-size: 120%;
+}
+#calendar{
+    float:right;
+    margin-right: 25%;
+}
