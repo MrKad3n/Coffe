@@ -147,3 +147,24 @@ svg {
     float:right;
     margin-right: 25%;
 }
+
+button {
+  padding: 10px 20px;
+  font-size: 13px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative; /* Needed for pseudo-elements or absolute positioning */
+  overflow: hidden; /* Ensures gradient stays within button bounds */
+
+  /* Initial gradient setup */
+  background: linear-gradient(to right, #F9E0BB, #fac677, #ffad31);
+  background-size: 200% auto;
+  background-position: left center;
+  transition: background-position 0.5s ease-out;
+}
+
+button:hover {
+  background-position: right center;
+}
