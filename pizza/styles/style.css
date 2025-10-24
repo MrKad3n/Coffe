@@ -76,3 +76,15 @@ footer img {
 .hover:hover {
     background-color: rgba(179, 179, 179, 0.2);
 }
+
+main img{
+    width:20%;
+    height:auto;
+    margin:0 14%;
+    padding:0;
+    border:#243641 solid 8px;
+    border-radius: 3px;
+}
+details {
+    text-align: center
+}
