@@ -1,10 +1,13 @@
-		<title>The del barrio Coffee</title>
-		<meta charset="UTF-8">
-		<meta name="description" content="">
-		<meta name="keywords" content="">
-		<meta name="display" content="width=device-width initial-scale=1.0">
-		<link rel="stylesheet" href="styles/style.css">
-		<script src="main.js"></script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The del barrio Coffee</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="display" content="width=device-width initial-scale=1.0">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="main.js"></script>
         <style>
             aside {
                 float: right;
@@ -50,11 +53,15 @@
                 margin-bottom: 15px;
                 width: 100%;
             }
+            .title {
+                color:#e63946;
+                font-size:clamp(30px,40px,45px);
+            }
         </style>
-	</head>
+    </head>
 
-	<body class="fadeInUp-animation">
-		<div id="group">
+    <body class="fadeInUp-animation">
+        <div id="group">
             <header>
                 <a href="./index.html"><img src="./images/logo.png" alt="The flying tomato Logo"></a>
             </header>
@@ -96,16 +103,17 @@
                     <button type="button" class="topping-btn" data-id="tomato" data-name="Tomato" data-src="images/tomato.png">Select</button>
                 </div>
             </aside>
-		
-		<main>
-            <h1>Buld Your Own Pizza!</h1>
+        
+        <main>
+            <h1 class="title">Buld Your Own Pizza!</h1>
 
-            <canvas id="pizzaCanvas" width="700" height="700" style="border:2px solid #dcdcdc; border-radius:8px; max-width:100%; height:auto; display:block; margin: 0 auto; background: #fff7e6"></canvas>
+            <canvas id="pizzaCanvas" width="700" height="700" style="border:2px solid #dcdcdc; border-radius:8px; max-width:100%; height:auto; display:block; margin: 0 auto; background-image: url('images/cutting.png'); background-size: 150% auto; background-position: center; background-repeat: no-repeat; background-color: transparent;"></canvas>
+            
             <div style="text-align:center; margin-top:10px;">
                 <div id="selectedPreview" style="display:inline-block; padding:6px 12px; border-radius:6px; background:#fff; border:1px dashed #ccc">Selected: <span id="selectedName">None</span></div>
                 <button id="resetBtn" style="margin-left:12px; padding:8px 12px; background:#e63946;color:#fff;border:none;border-radius:6px;cursor:pointer">Reset</button>
                 <button id="checkoutBtn" style="margin-left:8px; padding:8px 12px; background:#2a9d8f;color:#fff;border:none;border-radius:6px;cursor:pointer">Save for checkout</button>
-            </div>
+                </div>
 
             <script>
                 (function(){
@@ -146,9 +154,8 @@
                     function drawBase(){
                         ctx.clearRect(0,0,W,H);
 
-                        // background
-                        ctx.fillStyle = '#fff7e6';
-                        ctx.fillRect(0,0,W,H);
+                        // NOTE: the canvas has a CSS background image (cutting board).
+                        // Do NOT fill the full rect so the background image remains visible.
 
                         // crust
                         ctx.beginPath();
@@ -159,7 +166,8 @@
                         // sauce/cheese
                         ctx.beginPath();
                         ctx.arc(cx,cy,SAUCE_R,0,Math.PI*2);
-                        ctx.fillStyle = '#f5c6a5';
+                        // make the cheese more yellow per request
+                        ctx.fillStyle = '#ffea5b';
                         ctx.fill();
 
                         // draw slice separators
@@ -265,6 +273,7 @@
 
                     // initialize
                     Promise.all(preloadPromises).then(()=>{
+                        // No need for applyBackgroundSettings function anymore as it's set in CSS/HTML
                         loadStateFromStorage();
                         redraw();
                     });
@@ -273,7 +282,7 @@
                     window._pizzaBuilder = { state, redraw };
                 })();
             </script>
-		</main>
+        </main>
 
         <footer>
             <div>
@@ -293,6 +302,6 @@
                 </div>
             </div>
             </div>
-		</footer>
-	</body>
+        </footer>
+    </body>
 </html>
