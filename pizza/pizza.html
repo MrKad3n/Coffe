@@ -57,6 +57,56 @@
                 color:#e63946;
                 font-size:clamp(30px,40px,45px);
             }
+            /* Specialty Pizza Styles (merged from provided CSS) */
+            #figures {
+                display: flex;
+                justify-content: center;
+                margin: 20px auto; /* Added margin for separation */
+                /* Removed height:55% for auto-sizing */
+                gap: 20px; /* Space between pizza cards */
+                clear: both; /* Ensure it appears below the floating aside */
+                float: left;
+            }
+            figure {
+                display: flex;
+                flex-direction: column;
+                /* Adjusted width for better fit on various screens */
+                width: clamp(250px, 30%, 30%); 
+                background-color: #fff3e0; /* Changed to match aside/base theme */
+                border: 2px solid #f77f00; /* Used brand color for accent */
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 15px;
+                text-align: center;
+            }
+            figcaption {
+                font-size: 1.1em; /* Adjusted font size for readability */
+                padding: 10px 0;
+                color: #003049;
+            }
+            figure img {
+                margin-bottom: 10px;
+                width: 100%;
+                /* Set a more flexible height */
+                height: auto; 
+                max-height: 250px;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+            .add-to-cart-btn {
+                background-color: #2a9d8f; /* Checkout color for cart action */
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+                transition: background-color 0.3s;
+            }
+            .add-to-cart-btn:hover {
+                background-color: #1e7d70;
+            }
         </style>
     </head>
 
@@ -114,6 +164,25 @@
                 <button id="resetBtn" style="margin-left:12px; padding:8px 12px; background:#e63946;color:#fff;border:none;border-radius:6px;cursor:pointer">Reset</button>
                 <button id="checkoutBtn" style="margin-left:8px; padding:8px 12px; background:#2a9d8f;color:#fff;border:none;border-radius:6px;cursor:pointer">Save for checkout</button>
                 </div>
+
+                <figure>
+                    <h3>The Gordan</h3> 
+                    <img src="./images/TheGordan.jpg" alt="A delicious Margherita pizza with fresh basil and mozzarella">
+                    <figcaption>Our signature Margherita pizza, topped with fresh basil and mozzarella.</figcaption>
+                    <button type="button" class="add-to-cart-btn" data-pizza-name="The Gordan">Add to Cart</button>
+                </figure>
+                <figure>
+                    <h3>The Dawg</h3>
+                    <img src="./images/TheDawg.jpg" alt="A delicious Meat Lover's pizza, loaded with pepperoni, sausage, and bacon">
+                    <figcaption>Our Meat Lover's pizza, loaded with pepperoni, sausage, and bacon.</figcaption>
+                    <button type="button" class="add-to-cart-btn" data-pizza-name="The Dawg">Add to Cart</button>
+                </figure>
+                <figure>
+                    <h3>Goozine Cuzinee</h3>
+                    <img src="./images/Goozine Cuzinee.webp" alt="A delicious Veggie Delight pizza">
+                    <figcaption>Our Veggie Delight pizza</figcaption>
+                    <button type="button" class="add-to-cart-btn" data-pizza-name="Goozine Cuzinee">Add to Cart</button>
+                </figure>
 
             <script>
                 (function(){
