@@ -68,3 +68,15 @@ footer img {
     margin: 0px 10px;
     transition: transform 0.3s;
 }
+
+main img{
+    width:20%;
+    height:auto;
+    margin:0 14%;
+    padding:0;
+    border:#243641 solid 8px;
+    border-radius: 3px;
+}
+details *{
+    text-align: center;
+}
