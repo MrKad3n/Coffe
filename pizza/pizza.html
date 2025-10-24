@@ -3,12 +3,13 @@
     <head>
         <title>The del barrio Coffee</title>
         <meta charset="UTF-8">
-        <meta name="description" content="">
-        <meta name="keywords" content="">
+        <meta name="description" content="Build your perfect pizza or choose from our specialty menu.">
+        <meta name="keywords" content="pizza, custom pizza, specialty pizzas, pepperoni, gourmet, The Flying Tomato">
         <meta name="display" content="width=device-width initial-scale=1.0">
         <link rel="stylesheet" href="styles/style.css">
         <script src="main.js"></script>
         <style>
+            /* Base styles from original HTML */
             aside {
                 float: right;
                 display: flex;
@@ -61,40 +62,42 @@
             #figures {
                 display: flex;
                 justify-content: center;
-                margin: 20px auto; /* Added margin for separation */
-                /* Removed height:55% for auto-sizing */
+                margin: 20px 0; /* Adjusted margin */
                 gap: 20px; /* Space between pizza cards */
                 clear: both; /* Ensure it appears below the floating aside */
-                float: left;
+                
+            }
+            .specialty-section {
+                /* Ensures the section doesn't wrap around the aside */
+                display: block; 
+                margin-bottom: 40px;
             }
             figure {
                 display: flex;
                 flex-direction: column;
-                /* Adjusted width for better fit on various screens */
                 width: clamp(250px, 30%, 30%); 
-                background-color: #fff3e0; /* Changed to match aside/base theme */
-                border: 2px solid #f77f00; /* Used brand color for accent */
+                background-color: #fff3e0;
+                border: 2px solid #f77f00;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 padding: 15px;
                 text-align: center;
             }
             figcaption {
-                font-size: 1.1em; /* Adjusted font size for readability */
+                font-size: 1.1em;
                 padding: 10px 0;
                 color: #003049;
             }
             figure img {
                 margin-bottom: 10px;
                 width: 100%;
-                /* Set a more flexible height */
                 height: auto; 
                 max-height: 250px;
                 object-fit: cover;
                 border-radius: 4px;
             }
             .add-to-cart-btn {
-                background-color: #2a9d8f; /* Checkout color for cart action */
+                background-color: #2a9d8f; 
                 color: white;
                 border: none;
                 padding: 10px 15px;
@@ -107,6 +110,27 @@
             .add-to-cart-btn:hover {
                 background-color: #1e7d70;
             }
+            /* New Checkout Styles */
+            #checkout-section {
+                float: left;
+                width: 65%; /* Max width to accommodate the aside */
+                padding: 20px;
+                background-color: #eae2b7; /* Light background for contrast */
+                border: 2px solid #f77f00;
+                border-radius: 8px;
+                margin: 20px 0;
+            }
+            #cart-items li {
+                background-color: #fff3e0;
+                padding: 8px;
+                margin: 5px 0;
+                border-radius: 4px;
+                list-style: none;
+                border-left: 5px solid #d62828;
+            }
+            #cart-items {
+                padding: 0;
+            }
         </style>
     </head>
 
@@ -117,6 +141,7 @@
             </header>
             <nav>
                     <a href="./index.html" id="here">Home</a>
+                     <a href="ball.html">The Pizzaball War</a>
                     <a href="./pizza.html">Build your own pizza</a>
             </nav>
         </div>
@@ -155,59 +180,80 @@
             </aside>
         
         <main>
-            <h1 class="title">Buld Your Own Pizza!</h1>
+            <h1 class="title">Build Your Own Pizza!</h1>
 
             <canvas id="pizzaCanvas" width="700" height="700" style="border:2px solid #dcdcdc; border-radius:8px; max-width:100%; height:auto; display:block; margin: 0 auto; background-image: url('images/cutting.png'); background-size: 150% auto; background-position: center; background-repeat: no-repeat; background-color: transparent;"></canvas>
             
             <div style="text-align:center; margin-top:10px;">
                 <div id="selectedPreview" style="display:inline-block; padding:6px 12px; border-radius:6px; background:#fff; border:1px dashed #ccc">Selected: <span id="selectedName">None</span></div>
                 <button id="resetBtn" style="margin-left:12px; padding:8px 12px; background:#e63946;color:#fff;border:none;border-radius:6px;cursor:pointer">Reset</button>
-                <button id="checkoutBtn" style="margin-left:8px; padding:8px 12px; background:#2a9d8f;color:#fff;border:none;border-radius:6px;cursor:pointer">Save for checkout</button>
+                <button id="addCustomToCartBtn" style="margin-left:8px; padding:8px 12px; background:#2a9d8f;color:#fff;border:none;border-radius:6px;cursor:pointer">Add Custom Pizza to Cart</button>
+            </div>
+
+            <section class="specialty-section">
+                <h1 class="title" style="margin-top: 60px;">Our Specialty Pizzas</h1>
+                <div id="figures">
+                    <figure>
+                        <h3>The Gordan</h3> 
+                        <img src="./images/TheGordan.jpg" alt="A delicious Margherita pizza with fresh basil and mozzarella">
+                        <figcaption>Our signature Margherita pizza, topped with fresh basil and mozzarella.</figcaption>
+                        <button type="button" class="add-to-cart-btn" data-pizza-name="The Gordan">Add to Cart</button>
+                    </figure>
+                    <figure>
+                        <h3>The Dawg</h3>
+                        <img src="./images/TheDawg.jpg" alt="A delicious Meat Lover's pizza, loaded with pepperoni, sausage, and bacon">
+                        <figcaption>Our Meat Lover's pizza, loaded with pepperoni, sausage, and bacon.</figcaption>
+                        <button type="button" class="add-to-cart-btn" data-pizza-name="The Dawg">Add to Cart</button>
+                    </figure>
+                    <figure>
+                        <h3>Goozine Cuzinee</h3>
+                        <img src="./images/Goozine Cuzinee.webp" alt="A delicious Veggie Delight pizza">
+                        <figcaption>Our Veggie Delight pizza</figcaption>
+                        <button type="button" class="add-to-cart-btn" data-pizza-name="Goozine Cuzinee">Add to Cart</button>
+                    </figure>
                 </div>
-
-                <figure>
-                    <h3>The Gordan</h3> 
-                    <img src="./images/TheGordan.jpg" alt="A delicious Margherita pizza with fresh basil and mozzarella">
-                    <figcaption>Our signature Margherita pizza, topped with fresh basil and mozzarella.</figcaption>
-                    <button type="button" class="add-to-cart-btn" data-pizza-name="The Gordan">Add to Cart</button>
-                </figure>
-                <figure>
-                    <h3>The Dawg</h3>
-                    <img src="./images/TheDawg.jpg" alt="A delicious Meat Lover's pizza, loaded with pepperoni, sausage, and bacon">
-                    <figcaption>Our Meat Lover's pizza, loaded with pepperoni, sausage, and bacon.</figcaption>
-                    <button type="button" class="add-to-cart-btn" data-pizza-name="The Dawg">Add to Cart</button>
-                </figure>
-                <figure>
-                    <h3>Goozine Cuzinee</h3>
-                    <img src="./images/Goozine Cuzinee.webp" alt="A delicious Veggie Delight pizza">
-                    <figcaption>Our Veggie Delight pizza</figcaption>
-                    <button type="button" class="add-to-cart-btn" data-pizza-name="Goozine Cuzinee">Add to Cart</button>
-                </figure>
-
+            </section>
+            <section id="checkout-section">
+                <h1 class="title" style="font-size: 2em; margin-bottom: 15px;">Checkout Summary</h1>
+                <div id="cart-content">
+                    <ul id="cart-items">
+                        <li id="empty-cart-message">Your cart is empty.</li>
+                    </ul>
+                    <p style="font-weight: bold; margin-top: 15px;">Total Items: <span id="total-items">0</span></p>
+                    <button id="finalCheckoutBtn" style="padding: 10px 20px; background:#e63946;color:#fff;border:none;border-radius:6px;cursor:pointer; margin-top: 10px;">Proceed to Payment</button>
+                </div>
+            </section>
             <script>
                 (function(){
-                    // Pizza builder script
+                    // --- DOM ELEMENTS ---
                     const canvas = document.getElementById('pizzaCanvas');
                     const ctx = canvas.getContext('2d');
+                    const toppingButtons = Array.from(document.querySelectorAll('.topping-btn'));
+                    const addToCartButtons = Array.from(document.querySelectorAll('.add-to-cart-btn'));
+                    const resetBtn = document.getElementById('resetBtn');
+                    const addCustomToCartBtn = document.getElementById('addCustomToCartBtn'); // New Button for BYO
+                    const finalCheckoutBtn = document.getElementById('finalCheckoutBtn');
+                    const cartItemsList = document.getElementById('cart-items');
+                    const emptyCartMessage = document.getElementById('empty-cart-message');
+                    const totalItemsSpan = document.getElementById('total-items');
+
+                    // --- CONSTANTS ---
                     const W = canvas.width;
                     const H = canvas.height;
                     const cx = W/2, cy = H/2;
                     const OUTER_R = Math.min(W,H)/2 - 30;
                     const SAUCE_R = OUTER_R - 40;
                     const NUM_SLICES = 8;
+                    const STORAGE_KEY = 'pizza_builder_state';
 
-                    const toppingButtons = Array.from(document.querySelectorAll('.topping-btn'));
-                    const selectedName = document.getElementById('selectedName');
-                    const resetBtn = document.getElementById('resetBtn');
-                    const checkoutBtn = document.getElementById('checkoutBtn');
-
-                    // state
+                    // --- STATE ---
                     const state = {
-                        selected: null, // {id,name,src}
-                        slices: Array.from({length:NUM_SLICES}, ()=>[])
+                        selected: null,
+                        slices: Array.from({length:NUM_SLICES}, ()=>[]), // BYO pizza toppings
+                        cart: [] // To hold all items
                     };
 
-                    // preload images
+                    // --- IMAGES ---
                     const toppingImages = {};
                     const preloadPromises = toppingButtons.map(btn=>{
                         const src = btn.dataset.src;
@@ -220,22 +266,18 @@
                         });
                     });
 
+                    // --- CANVAS DRAWING FUNCTIONS ---
                     function drawBase(){
                         ctx.clearRect(0,0,W,H);
-
-                        // NOTE: the canvas has a CSS background image (cutting board).
-                        // Do NOT fill the full rect so the background image remains visible.
-
                         // crust
                         ctx.beginPath();
                         ctx.arc(cx,cy,OUTER_R,0,Math.PI*2);
-                        ctx.fillStyle = '#f4c27a'; // crust color
+                        ctx.fillStyle = '#f4c27a';
                         ctx.fill();
 
                         // sauce/cheese
                         ctx.beginPath();
                         ctx.arc(cx,cy,SAUCE_R,0,Math.PI*2);
-                        // make the cheese more yellow per request
                         ctx.fillStyle = '#ffea5b';
                         ctx.fill();
 
@@ -265,9 +307,10 @@
                         }
                     }
 
+                    // --- UTILITY FUNCTIONS ---
                     function getSliceIndexFromCoord(x,y){
-                        const angle = Math.atan2(y - cy, x - cx); // -PI..PI
-                        let deg = angle * 180/Math.PI; // -180..180
+                        const angle = Math.atan2(y - cy, x - cx);
+                        let deg = angle * 180/Math.PI;
                         if(deg < 0) deg += 360;
                         const slice = Math.floor(deg / (360/NUM_SLICES));
                         return slice;
@@ -282,67 +325,139 @@
                         return {x,y};
                     }
 
-                    // handle topping selection
+                    function getCustomPizzaDescription(slices) {
+                        const allToppings = slices.flat();
+                        if (allToppings.length === 0) return "Plain Cheese Pizza (No Toppings)";
+
+                        const counts = allToppings.reduce((acc, topping) => {
+                            acc[topping.id] = (acc[topping.id] || 0) + 1;
+                            return acc;
+                        }, {});
+
+                        const toppingNames = Object.keys(counts).map(id => {
+                            const toppingName = toppingButtons.find(btn => btn.dataset.id === id)?.dataset.name || id;
+                            return `${toppingName} (${counts[id]})`;
+                        });
+                        return `Custom Pizza w/ ${toppingNames.join(', ')}`;
+                    }
+
+                    function renderCart() {
+                        cartItemsList.innerHTML = ''; // Clear current list
+
+                        if (state.cart.length === 0) {
+                            emptyCartMessage.style.display = 'list-item';
+                        } else {
+                            emptyCartMessage.style.display = 'none';
+                            state.cart.forEach((item, index) => {
+                                const li = document.createElement('li');
+                                li.textContent = item.name;
+                                li.dataset.index = index;
+                                cartItemsList.appendChild(li);
+                            });
+                        }
+                        totalItemsSpan.textContent = state.cart.length;
+                    }
+
+                    // --- STORAGE FUNCTIONS ---
+                    function saveStateToStorage(){
+                        // We only store the cart, and the current BYO slices as a single, saved item (if applicable)
+                        const payload = { 
+                            cart: state.cart
+                        };
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+                        renderCart(); // Update UI after saving
+                    }
+
+                    function loadStateFromStorage(){
+                        const raw = localStorage.getItem(STORAGE_KEY);
+                        if(!raw) return;
+                        try{
+                            const obj = JSON.parse(raw);
+                            if (obj && Array.isArray(obj.cart)) {
+                                state.cart = obj.cart;
+                            }
+                        }catch(e){ console.warn('Failed parse state',e); }
+                        renderCart();
+                    }
+
+                    // --- EVENT HANDLERS ---
                     toppingButtons.forEach(btn=>{
                         btn.addEventListener('click', ()=>{
-                            // remove selected class
                             toppingButtons.forEach(b=>b.style.border = '');
                             btn.style.border = '2px solid #2a9d8f';
                             state.selected = {id: btn.dataset.id, name: btn.dataset.name, src: btn.dataset.src};
-                            selectedName.textContent = state.selected.name;
+                            document.getElementById('selectedName').textContent = state.selected.name;
                         });
                     });
 
-                    // canvas click -> place topping in that slice
+                    addToCartButtons.forEach(btn=>{
+                        btn.addEventListener('click', ()=>{
+                            const pizzaName = btn.dataset.pizzaName;
+                            state.cart.push({ type: 'specialty', name: pizzaName, toppings: [] });
+                            saveStateToStorage();
+                            alert(`${pizzaName} added to cart!`);
+                        });
+                    });
+
                     canvas.addEventListener('click', (e)=>{
-                        if(!state.selected) return; // no topping selected
+                        if(!state.selected) return;
                         const {x,y} = canvasCoordsFromEvent(e);
                         const dx = x - cx, dy = y - cy;
                         const dist = Math.sqrt(dx*dx+dy*dy);
-                        if(dist > OUTER_R) return; // clicked outside pizza
+                        if(dist > OUTER_R) return;
 
                         const slice = getSliceIndexFromCoord(x,y);
 
-                        // place topping at clicked location but clamp inside inner circle
-                        const size = 40; // default size
+                        const size = 40;
                         const entry = { id: state.selected.id, x, y, size };
                         state.slices[slice].push(entry);
-                        saveStateToStorage();
+                        // Do not save to cart here, only save the current BYO state to the redraw
                         redraw();
                     });
 
                     resetBtn.addEventListener('click', ()=>{
-                        if(!confirm('Clear all toppings?')) return;
+                        if(!confirm('Clear all custom pizza toppings?')) return;
                         state.slices = Array.from({length:NUM_SLICES}, ()=>[]);
-                        localStorage.removeItem('pizza_builder_state');
                         redraw();
                     });
+                    
+                    // --- NEW: Add Custom Pizza to Cart ---
+                    addCustomToCartBtn.addEventListener('click', ()=>{
+                        // 1. Get description of the current custom pizza
+                        const description = getCustomPizzaDescription(state.slices);
+                        
+                        // 2. Add it to the cart
+                        state.cart.push({
+                            type: 'custom',
+                            name: description,
+                            slices: JSON.parse(JSON.stringify(state.slices)) // Deep copy of the toppings array
+                        });
 
-                    checkoutBtn.addEventListener('click', ()=>{
+                        // 3. Clear the canvas (as the pizza has been added to cart)
+                        state.slices = Array.from({length:NUM_SLICES}, ()=>[]);
+                        redraw();
+                        
+                        // 4. Save and alert
                         saveStateToStorage();
-                        alert('Pizza saved for checkout. You can continue to the checkout page.');
+                        alert(`Custom Pizza added to cart! Start a new one!`);
                     });
 
-                    function saveStateToStorage(){
-                        // store minimal data
-                        const payload = { slices: state.slices };
-                        localStorage.setItem('pizza_builder_state', JSON.stringify(payload));
-                    }
+                    finalCheckoutBtn.addEventListener('click', ()=>{
+                        saveStateToStorage();
+                        if (state.cart.length === 0) {
+                            alert("Your cart is empty. Add a pizza first!");
+                            return;
+                        }
+                        
+                        let message = `You are checking out with ${state.cart.length} item(s)! \n`;
+                        state.cart.forEach((item, index) => {
+                            message += `${index + 1}. ${item.name}\n`;
+                        });
+                        alert(message);
+                    });
 
-                    function loadStateFromStorage(){
-                        const raw = localStorage.getItem('pizza_builder_state');
-                        if(!raw) return;
-                        try{
-                            const obj = JSON.parse(raw);
-                            if(obj && Array.isArray(obj.slices) && obj.slices.length===NUM_SLICES){
-                                state.slices = obj.slices;
-                            }
-                        }catch(e){ console.warn('Failed parse state',e); }
-                    }
-
-                    // initialize
+                    // --- INITIALIZATION ---
                     Promise.all(preloadPromises).then(()=>{
-                        // No need for applyBackgroundSettings function anymore as it's set in CSS/HTML
                         loadStateFromStorage();
                         redraw();
                     });
@@ -369,7 +484,6 @@
                 <div class="hover">
                 <a href="https://www.twitter.com/theflyingtomato"><img src="./images/x.png" alt="X Logo"></a>
                 </div>
-            </div>
             </div>
         </footer>
     </body>
