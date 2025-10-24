@@ -5,6 +5,52 @@
 		<meta name="display" content="width=device-width initial-scale=1.0">
 		<link rel="stylesheet" href="styles/style.css">
 		<script src="main.js"></script>
+        <style>
+            aside {
+                float: right;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                width: 30%;
+                background-color: #fff3e0;
+                padding: 10px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                border:2px solid #ccc;
+                border-radius: 8px;
+            }
+            aside div {
+                margin-bottom: 15px;
+                text-align: center;
+                width:40%;
+                height: auto;
+                border: 2px solid #ccc;
+                border-radius: 8px;
+            }
+            aside img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+            aside button {
+                margin-top: 5px;
+                padding: 8px 12px;
+                background-color: #f77f00;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.5s;
+            }
+            aside button:hover {
+                background-color: #d96e00;
+            }
+            aside h2 {
+                text-align: center;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+        </style>
 	</head>
 
 	<body class="fadeInUp-animation">
@@ -14,25 +60,219 @@
             </header>
             <nav>
                     <a href="./index.html" id="here">Home</a>
-                    <a href="./checkout.html">Build your own pizza</a>
+                    <a href="./pizza.html">Build your own pizza</a>
             </nav>
         </div>
 		
 		<main>
             <h1>Buld Your Own Pizza!</h1>
 
-            <canvas>
-
-
-            </canvas>
+            <canvas id="pizzaCanvas" width="700" height="700" style="border:2px solid #dcdcdc; border-radius:8px; max-width:100%; height:auto; display:block; margin: 0 auto; background: #fff7e6"></canvas>
+            <div style="text-align:center; margin-top:10px;">
+                <div id="selectedPreview" style="display:inline-block; padding:6px 12px; border-radius:6px; background:#fff; border:1px dashed #ccc">Selected: <span id="selectedName">None</span></div>
+                <button id="resetBtn" style="margin-left:12px; padding:8px 12px; background:#e63946;color:#fff;border:none;border-radius:6px;cursor:pointer">Reset</button>
+                <button id="checkoutBtn" style="margin-left:8px; padding:8px 12px; background:#2a9d8f;color:#fff;border:none;border-radius:6px;cursor:pointer">Save for checkout</button>
+            </div>
             <aside>
                 <h2>Options</h2>
                 <div>
                     <h3>Pepperoine</h3>
-                    <img src="pepperoni" alt="pepperoni">
-                    <button type="button">Select</button>
+                    <img src="images/pepperoni.png" alt="pepperoni">
+                    <button type="button" class="topping-btn" data-id="pepperoni" data-name="Pepperoni" data-src="images/pepperoni.png">Select</button>
+                </div>
+                <div>
+                    <h3>Sasuage</h3>
+                    <img src="images/sasuage.png" alt="sasuage">
+                    <button type="button" class="topping-btn" data-id="sausage" data-name="Sausage" data-src="images/sasuage.png">Select</button>
+                </div>
+                <div>
+                    <h3>Bacon</h3>
+                    <img src="images/bacon.png" alt="bacon">
+                    <button type="button" class="topping-btn" data-id="bacon" data-name="Bacon" data-src="images/bacon.png">Select</button>
+                </div>
+                <div>
+                    <h3>Pineapple</h3>
+                    <img src="images/pineapple.png" alt="pineapple">
+                    <button type="button" class="topping-btn" data-id="pineapple" data-name="Pineapple" data-src="images/pineapple.png">Select</button>
+                </div>
+                <div>
+                    <h3>muchroom</h3>
+                    <img src="images/mushroom.png" alt="mushroom">
+                    <button type="button" class="topping-btn" data-id="mushroom" data-name="Mushroom" data-src="images/mushroom.png">Select</button>
+                </div>
+                <div>
+                    <h3>Cherry tomato</h3>
+                    <img src="images/tomato.png" alt="tomato">
+                    <button type="button" class="topping-btn" data-id="tomato" data-name="Tomato" data-src="images/tomato.png">Select</button>
                 </div>
             </aside>
+
+            <script>
+                (function(){
+                    // Pizza builder script
+                    const canvas = document.getElementById('pizzaCanvas');
+                    const ctx = canvas.getContext('2d');
+                    const W = canvas.width;
+                    const H = canvas.height;
+                    const cx = W/2, cy = H/2;
+                    const OUTER_R = Math.min(W,H)/2 - 30;
+                    const SAUCE_R = OUTER_R - 40;
+                    const NUM_SLICES = 8;
+
+                    const toppingButtons = Array.from(document.querySelectorAll('.topping-btn'));
+                    const selectedName = document.getElementById('selectedName');
+                    const resetBtn = document.getElementById('resetBtn');
+                    const checkoutBtn = document.getElementById('checkoutBtn');
+
+                    // state
+                    const state = {
+                        selected: null, // {id,name,src}
+                        slices: Array.from({length:NUM_SLICES}, ()=>[])
+                    };
+
+                    // preload images
+                    const toppingImages = {};
+                    const preloadPromises = toppingButtons.map(btn=>{
+                        const src = btn.dataset.src;
+                        const id = btn.dataset.id;
+                        return new Promise((resolve)=>{
+                            const img = new Image();
+                            img.src = src;
+                            img.onload = ()=>{ toppingImages[id]=img; resolve(); };
+                            img.onerror = ()=>{ console.warn('Failed to load',src); resolve(); };
+                        });
+                    });
+
+                    function drawBase(){
+                        ctx.clearRect(0,0,W,H);
+
+                        // background
+                        ctx.fillStyle = '#fff7e6';
+                        ctx.fillRect(0,0,W,H);
+
+                        // crust
+                        ctx.beginPath();
+                        ctx.arc(cx,cy,OUTER_R,0,Math.PI*2);
+                        ctx.fillStyle = '#f4c27a'; // crust color
+                        ctx.fill();
+
+                        // sauce/cheese
+                        ctx.beginPath();
+                        ctx.arc(cx,cy,SAUCE_R,0,Math.PI*2);
+                        ctx.fillStyle = '#f5c6a5';
+                        ctx.fill();
+
+                        // draw slice separators
+                        ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+                        ctx.lineWidth = 2;
+                        for(let i=0;i<NUM_SLICES;i++){
+                            const ang = (i/NUM_SLICES)*Math.PI*2;
+                            ctx.beginPath();
+                            ctx.moveTo(cx,cy);
+                            ctx.lineTo(cx + Math.cos(ang)*OUTER_R, cy + Math.sin(ang)*OUTER_R);
+                            ctx.stroke();
+                        }
+                    }
+
+                    function redraw(){
+                        drawBase();
+                        // draw toppings
+                        for(let s=0;s<NUM_SLICES;s++){
+                            const list = state.slices[s];
+                            for(const t of list){
+                                const img = toppingImages[t.id];
+                                if(!img) continue;
+                                const size = t.size || 36;
+                                ctx.drawImage(img, t.x - size/2, t.y - size/2, size, size);
+                            }
+                        }
+                    }
+
+                    function getSliceIndexFromCoord(x,y){
+                        const angle = Math.atan2(y - cy, x - cx); // -PI..PI
+                        let deg = angle * 180/Math.PI; // -180..180
+                        if(deg < 0) deg += 360;
+                        const slice = Math.floor(deg / (360/NUM_SLICES));
+                        return slice;
+                    }
+
+                    function canvasCoordsFromEvent(e){
+                        const rect = canvas.getBoundingClientRect();
+                        const scaleX = canvas.width / rect.width;
+                        const scaleY = canvas.height / rect.height;
+                        const x = (e.clientX - rect.left) * scaleX;
+                        const y = (e.clientY - rect.top) * scaleY;
+                        return {x,y};
+                    }
+
+                    // handle topping selection
+                    toppingButtons.forEach(btn=>{
+                        btn.addEventListener('click', ()=>{
+                            // remove selected class
+                            toppingButtons.forEach(b=>b.style.border = '');
+                            btn.style.border = '2px solid #2a9d8f';
+                            state.selected = {id: btn.dataset.id, name: btn.dataset.name, src: btn.dataset.src};
+                            selectedName.textContent = state.selected.name;
+                        });
+                    });
+
+                    // canvas click -> place topping in that slice
+                    canvas.addEventListener('click', (e)=>{
+                        if(!state.selected) return; // no topping selected
+                        const {x,y} = canvasCoordsFromEvent(e);
+                        const dx = x - cx, dy = y - cy;
+                        const dist = Math.sqrt(dx*dx+dy*dy);
+                        if(dist > OUTER_R) return; // clicked outside pizza
+
+                        const slice = getSliceIndexFromCoord(x,y);
+
+                        // place topping at clicked location but clamp inside inner circle
+                        const size = 40; // default size
+                        const entry = { id: state.selected.id, x, y, size };
+                        state.slices[slice].push(entry);
+                        saveStateToStorage();
+                        redraw();
+                    });
+
+                    resetBtn.addEventListener('click', ()=>{
+                        if(!confirm('Clear all toppings?')) return;
+                        state.slices = Array.from({length:NUM_SLICES}, ()=>[]);
+                        localStorage.removeItem('pizza_builder_state');
+                        redraw();
+                    });
+
+                    checkoutBtn.addEventListener('click', ()=>{
+                        saveStateToStorage();
+                        alert('Pizza saved for checkout. You can continue to the checkout page.');
+                    });
+
+                    function saveStateToStorage(){
+                        // store minimal data
+                        const payload = { slices: state.slices };
+                        localStorage.setItem('pizza_builder_state', JSON.stringify(payload));
+                    }
+
+                    function loadStateFromStorage(){
+                        const raw = localStorage.getItem('pizza_builder_state');
+                        if(!raw) return;
+                        try{
+                            const obj = JSON.parse(raw);
+                            if(obj && Array.isArray(obj.slices) && obj.slices.length===NUM_SLICES){
+                                state.slices = obj.slices;
+                            }
+                        }catch(e){ console.warn('Failed parse state',e); }
+                    }
+
+                    // initialize
+                    Promise.all(preloadPromises).then(()=>{
+                        loadStateFromStorage();
+                        redraw();
+                    });
+
+                    // expose for debugging
+                    window._pizzaBuilder = { state, redraw };
+                })();
+            </script>
 		</main>
 
         <footer>

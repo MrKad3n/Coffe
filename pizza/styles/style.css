@@ -4,10 +4,12 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 #group {
-    background-color: #243641;
+    background-color: #3c474e;
 }
 body {
-    background-color: #FFC26F;
+    background-color: #fcbf49;
+    color: #003049;
+    min-height: 100vh;
 }
 header img {
     height: 100px;
@@ -45,10 +47,8 @@ nav a:hover {
     color: #f77f00;
     text-shadow:4px 4px 4px #eae2b7;
 }
-
-
 footer {
-    background-color: #884A39;
+    background-color: #3c474e;
     color: white;
     text-align: center;
     padding: 20px;
@@ -67,4 +67,12 @@ footer img {
     height: 40px;
     margin: 0px 10px;
     transition: transform 0.3s;
+}
+.hover {
+    align-items: center;
+    display: inline-flex;
+    padding: 10px;
+}
+.hover:hover {
+    background-color: rgba(179, 179, 179, 0.2);
 }
