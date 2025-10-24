@@ -55,6 +55,7 @@ nav a {
 }
 nav a:hover {
     color: #C38154;
+    text-shadow: 4px 4px 4px #fcbf49;
 }
 
 
