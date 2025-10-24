@@ -92,15 +92,20 @@ canvas {
     display: flex;
     justify-content: center;
     margin:0px auto;
+    height:55%
 }
 figure {
     display: flex;
     flex-direction: column;
-    width:clamp(80px,140px,200px);
+    width:clamp(10%,33%,33%);
+    height:100%;
 }
 figcaption {
-    font-size:clamp(10px,12px,14px);
+    font-size:clamp(10pt,20pt,30pt);
 }
 figure img {
     margin-bottom:0px;
+    width:100%;
+    height:clamp(15rem,20rem,25rem);
+    max-height: fit-content;
 }
