@@ -55,6 +55,7 @@ footer {
     position: sticky;
     display:flex;
     justify-content: space-around;
+    clear:both;
 }
 footer a {
     color:white;
@@ -76,15 +77,29 @@ footer img {
 .hover:hover {
     background-color: rgba(179, 179, 179, 0.2);
 }
-
-main img{
-    width:20%;
-    height:auto;
-    margin:0 14%;
-    padding:0;
-    border:#243641 solid 8px;
-    border-radius: 3px;
-}
 details {
     text-align: center
+}
+canvas {
+    border: #243641 solid 8px;
+    border-radius: 3px;
+    background-color: white;
+    width:30%;
+    margin:0px;
+}
+#figures {
+    display: flex;
+    justify-content: center;
+    margin:0px auto;
+}
+figure {
+    display: flex;
+    flex-direction: column;
+    width:clamp(80px,140px,200px);
+}
+figcaption {
+    font-size:clamp(10px,12px,14px);
+}
+figure img {
+    margin-bottom:0px;
 }
